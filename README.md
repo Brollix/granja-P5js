@@ -1,8 +1,8 @@
 # Simulador de Jardinería - Física de Objetos 2D
 
 **Materia:** Física de Objetos 2D  
-**Estudiante:** [Tu Nombre]  
-**Fecha:** [Fecha]  
+**Estudiantes:** Agustin Brollo, Agustin Murgia, Nazareno Scala  
+**Fecha:** 18/9/2025
 
 ## Descripción
 
