@@ -30,7 +30,7 @@ Juego de jardinería interactivo que implementa conceptos de física 2D usando P
 
 1. Las semillas aparecen como círculos marrones pequeños
 2. Al regar con la manguera, las partículas de agua caen con gravedad
-3. Cuando el agua toca una semilla, se convierte en planta verde grande
+3. Cuando el agua toca una semilla, se se acumula hasta llenarse y asi la planta madura
 4. Las plantas maduras muestran "¡LISTA!" y pueden cosecharse
 5. La cosecha de cada planta da 25 puntos
 
