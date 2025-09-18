@@ -8,6 +8,10 @@
 
 Juego de jardinería interactivo que implementa conceptos de física 2D usando P5.js. El objetivo es plantar semillas, regarlas con una manguera y cosechar las plantas cuando estén listas.
 
+## Demo en Vivo
+
+🌐 **Juega:** [https://brollix.github.io/granja-P5js/](https://brollix.github.io/granja-P5js/)
+
 ## Conceptos Físicos Implementados
 
 - **MRUV (Movimiento Rectilíneo Uniformemente Variado):** Las partículas de agua siguen trayectorias parabólicas
