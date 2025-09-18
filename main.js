@@ -124,7 +124,7 @@ function drawUI() {
 
     if (isHoseActive) {
         textStyle(BOLD);
-        text("💧 MANGUERA ACTIVA 💧", 30, 60);
+        text("MANGUERA ACTIVA", 30, 60);
         textStyle(NORMAL);
     }
 }

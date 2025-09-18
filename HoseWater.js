@@ -43,14 +43,6 @@ class HoseWater {
         noStroke();
         fill(this.color);
         ellipse(this.x, this.y, this.size, this.size);
-
-        fill(135, 206, 235, 100);
-        ellipse(this.x, this.y, this.size * 1.8, this.size * 1.8);
-
-        fill(0, 191, 255, 60);
-        ellipse(this.x - this.vx * 2, this.y - this.vy * 2, this.size * 1.4, this.size * 1.4);
-        fill(135, 206, 235, 40);
-        ellipse(this.x - this.vx * 4, this.y - this.vy * 4, this.size * 1.1, this.size * 1.1);
     }
 
     checkCollisionWithPlants() {
