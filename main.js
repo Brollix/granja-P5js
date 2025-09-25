@@ -6,6 +6,7 @@ let score = 0;
 let dt;
 let waterGain = 10;
 let waterStored = 0;
+let platform;
 
 // Seccion bomba 
 let startY = 550;
@@ -30,27 +31,35 @@ const PLANT_SIZE = 30;
 const POINTS_PER_PLANT = 25;
 const WATER_PER_PARTICLE = 1;
 
+//Plataforma
 function setup() {
-<<<<<<< Updated upstream
-    pump = createVector(50, startY);
-    let canvas = createCanvas(GAME_WIDTH, GAME_HEIGHT);
-    canvas.parent('gameContainer');
+	let canvas = createCanvas(GAME_WIDTH, GAME_HEIGHT);
+	canvas.parent('gameContainer');
+	platform = new Platform(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 1.35, 250, 20, 3);
+
 }
 
-function draw() {
-    console.log("Water",pumpWater)
-    dt = deltaTime / 1000;
+//Bomba
+function setup() {
+	pump = createVector(50, startY);
+	let canvas = createCanvas(GAME_WIDTH, GAME_HEIGHT);
+	canvas.parent('gameContainer');
+}
 
-    // Fondo
-    for (let i = 0; i <= GAME_HEIGHT; i++) {
-        let inter = map(i, 0, GAME_HEIGHT, 0, 1);
-        let c1 = color(135, 206, 235);
-        let c2 = color(173, 216, 230);
-        let c = lerpColor(c1, c2, inter);
-        stroke(c);
-        line(0, i, GAME_WIDTH, i);
-    }
-=======
+
+
+function draw() {
+	console.log("Water", pumpWater)
+	dt = deltaTime / 1000;
+	// Fondo
+	for (let i = 0; i <= GAME_HEIGHT; i++) {
+		let inter = map(i, 0, GAME_HEIGHT, 0, 1);
+		let c1 = color(135, 206, 235);
+		let c2 = color(173, 216, 230);
+		let c = lerpColor(c1, c2, inter);
+		stroke(c);
+		line(0, i, GAME_WIDTH, i);
+	}
 	pump = createVector(50, startY);
 	let canvas = createCanvas(GAME_WIDTH, GAME_HEIGHT);
 	canvas.parent('gameContainer');
@@ -80,7 +89,6 @@ function drawGame() {
 		stroke(c);
 		line(0, i, GAME_WIDTH, i);
 	}
->>>>>>> Stashed changes
 
 	// Suelo
 	let sueloHeight = GAME_HEIGHT / 3;
@@ -117,30 +125,11 @@ function drawGame() {
 	drawUI();
 	updatePlantPreview();
 
-<<<<<<< Updated upstream
-    // Generar agua
-    if (waterStored >= 0 && isHoseActive && frameCount % 4 === 0) {
-        let numStreams = 10;
-        let spreadRange = 30;
-        let baseAngle = 45;
-        
-        
-        
-        for (let i = 0; i < numStreams; i++) {
-            let spreadAngle = map(i, 0, numStreams - 1, -spreadRange, spreadRange);
-            hoseWater.push(new HoseWater(mouseX, mouseY, baseAngle, 10, spreadAngle));
-            hoseWater[i].waterPour();
-        }
-    }
-    pumpUpdate();
-=======
 	// Generar agua
 	if (waterStored >= 0 && isHoseActive && frameCount % 4 === 0) {
 		let numStreams = 10;
 		let spreadRange = 30;
 		let baseAngle = 45;
-
-
 
 		for (let i = 0; i < numStreams; i++) {
 			let spreadAngle = map(i, 0, numStreams - 1, -spreadRange, spreadRange);
@@ -149,7 +138,6 @@ function drawGame() {
 		}
 	}
 	pumpUpdate();
->>>>>>> Stashed changes
 }
 
 function updatePlantPreview() {
@@ -186,48 +174,48 @@ function updatePlantPreview() {
 
 function drawUI() {
 <<<<<<< Updated upstream
-    fill(0, 0, 0, 200);
-    textSize(18);
-    text("Click: Plantar | R: Regar | C: Cosechar", 30, 30);
-    text("Puntaje: " + score, 30, 90);
+	fill(0, 0, 0, 200);
+	textSize(18);
+	text("Click: Plantar | R: Regar | C: Cosechar", 30, 30);
+	text("Puntaje: " + score, 30, 90);
 
-    textStyle(BOLD);
-    text("Agua Restante", 30, 60);
-    text(abs(waterStored.toFixed(0)), 175, 60);
-    textStyle(NORMAL);
-    
+	textStyle(BOLD);
+	text("Agua Restante", 30, 60);
+	text(abs(waterStored.toFixed(0)), 175, 60);
+	textStyle(NORMAL);
+
 }
 
 function keyPressed() {
-    if (key === 'r' || key === 'R') {
-        isHoseActive = !isHoseActive;
-    }
+	if (key === 'r' || key === 'R') {
+		isHoseActive = !isHoseActive;
+	}
 
-    if (key === 'c' || key === 'C') {
-        for (let i = plants.length - 1; i >= 0; i--) {
-            let plant = plants[i];
-            if (plant.isReadyToHarvest()) {
-                plants.splice(i, 1);
-                score += POINTS_PER_PLANT;
-            }
-        }
-    }
+	if (key === 'c' || key === 'C') {
+		for (let i = plants.length - 1; i >= 0; i--) {
+			let plant = plants[i];
+			if (plant.isReadyToHarvest()) {
+				plants.splice(i, 1);
+				score += POINTS_PER_PLANT;
+			}
+		}
+	}
 }
 
 function mousePressed() {
-    if (mouseButton === LEFT && plantPreview) {
-        plants.push(new Plant(plantPreview.x, plantPreview.y));
-        plantPreview = null;
-    }
+	if (mouseButton === LEFT && plantPreview) {
+		plants.push(new Plant(plantPreview.x, plantPreview.y));
+		plantPreview = null;
+	}
 
-      // Chequeamos colision en Pump
-  if(  mouseX >= pump.x &&
-       mouseX <= pump.x + pumpWidth &&
-       mouseY >= pump.y &&
-       mouseY <= pump.y + pumpHeight )
-    
-    {mouseDragPump = true;
-    console.log("agarrado")}
+	// Chequeamos colision en Pump
+	if (mouseX >= pump.x &&
+		mouseX <= pump.x + pumpWidth &&
+		mouseY >= pump.y &&
+		mouseY <= pump.y + pumpHeight) {
+		mouseDragPump = true;
+		console.log("agarrado")
+	}
 
 =======
 	// Restaurar configuración de texto para el HUD
