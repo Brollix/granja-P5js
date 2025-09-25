@@ -3,6 +3,20 @@ let hoseWater = [];
 let isHoseActive = false;
 let plantPreview = null;
 let score = 0;
+let dt;
+let waterGain = 10;
+let waterStored = 0;
+
+// Seccion bomba 
+let startY = 550;
+let endY = 600;
+let mouseDragPump = false;
+let pumpWater = false;
+let pumpVel = 200;
+let pump;
+let pumpWidth = 150;
+let pumpHeight = 40;
+// Seccion bomba
 
 const GAME_WIDTH = 1200;
 const GAME_HEIGHT = 800;
@@ -17,12 +31,14 @@ const POINTS_PER_PLANT = 25;
 const WATER_PER_PARTICLE = 1;
 
 function setup() {
+    pump = createVector(50, startY);
     let canvas = createCanvas(GAME_WIDTH, GAME_HEIGHT);
     canvas.parent('gameContainer');
 }
 
 function draw() {
-    let dt = deltaTime / 1000;
+    console.log("Water",pumpWater)
+    dt = deltaTime / 1000;
 
     // Fondo
     for (let i = 0; i <= GAME_HEIGHT; i++) {
@@ -70,18 +86,20 @@ function draw() {
     updatePlantPreview();
 
     // Generar agua
-    if (isHoseActive && frameCount % 4 === 0) {
+    if (waterStored >= 0 && isHoseActive && frameCount % 4 === 0) {
         let numStreams = 10;
         let spreadRange = 30;
         let baseAngle = 45;
-
+        
+        
+        
         for (let i = 0; i < numStreams; i++) {
             let spreadAngle = map(i, 0, numStreams - 1, -spreadRange, spreadRange);
             hoseWater.push(new HoseWater(mouseX, mouseY, baseAngle, 10, spreadAngle));
+            hoseWater[i].waterPour();
         }
     }
-
-    drawUI();
+    pumpUpdate();
 }
 
 function updatePlantPreview() {
@@ -122,11 +140,11 @@ function drawUI() {
     text("Click: Plantar | R: Regar | C: Cosechar", 30, 30);
     text("Puntaje: " + score, 30, 90);
 
-    if (isHoseActive) {
-        textStyle(BOLD);
-        text("MANGUERA ACTIVA", 30, 60);
-        textStyle(NORMAL);
-    }
+    textStyle(BOLD);
+    text("Agua Restante", 30, 60);
+    text(abs(waterStored.toFixed(0)), 175, 60);
+    textStyle(NORMAL);
+    
 }
 
 function keyPressed() {
@@ -150,4 +168,14 @@ function mousePressed() {
         plants.push(new Plant(plantPreview.x, plantPreview.y));
         plantPreview = null;
     }
+
+      // Chequeamos colision en Pump
+  if(  mouseX >= pump.x &&
+       mouseX <= pump.x + pumpWidth &&
+       mouseY >= pump.y &&
+       mouseY <= pump.y + pumpHeight )
+    
+    {mouseDragPump = true;
+    console.log("agarrado")}
+
 }

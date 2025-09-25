@@ -57,4 +57,9 @@ class HoseWater {
         }
         return false;
     }
+
+    waterPour() {
+        waterStored -= 1 * dt;
+    }
+
 }
