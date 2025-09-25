@@ -29,10 +29,16 @@ function pumpUpdate() {
     }
     
     // Dibujar bomba
-    fill(255, 30 , 30);
+    fill(100, 100, 100);
+    rect(pump.x + pumpWidth / 2 - 20, pump.y, 40, pumpHeight * 3);
+
+    fill(50, 50 , 255);
     rect(pump.x, pump.y, pumpWidth, pumpHeight);
     console.log(pump.y);
-    drawUI();
+
+    fill(50, 50, 190);
+    rect(pump.x - 10, endY + pumpHeight, pumpWidth + 20, pumpHeight * 4);
+    
 
     if(pumpWater && pump.y <= startY){
     pumpWater = false;
