@@ -2,7 +2,7 @@
 
 **Materia:** Física de Objetos 2D  
 **Estudiantes:** Agustin Brollo, Agustin Murgia, Nazareno Scala  
-**Fecha:** 18/9/2025
+**Fecha:** 25/9/2025
 
 ## Descripción
 
@@ -22,17 +22,20 @@ Juego de jardinería interactivo que implementa conceptos de física 2D usando P
 
 ## Controles
 
-- **Click:** Plantar semilla
-- **R:** Activar/desactivar manguera
+- **Click:** Plantar semilla en posición disponible
+- **R:** Activar/desactivar manguera (requiere agua en el tanque)
 - **C:** Cosechar plantas maduras
+- **Arrastrar bomba:** Click y arrastrar la bomba hacia abajo para extraer agua del pozo
 
 ## Funcionamiento
 
-1. Las semillas aparecen como círculos marrones pequeños
-2. Al regar con la manguera, las partículas de agua caen con gravedad
-3. Cuando el agua toca una semilla, se se acumula hasta llenarse y asi la planta madura
-4. Las plantas maduras muestran "¡LISTA!" y pueden cosecharse
-5. La cosecha de cada planta da 25 puntos
+1. **Plantación:** Las semillas aparecen como círculos marrones pequeños en posiciones predefinidas
+2. **Sistema de agua:** Debes bombear agua desde el pozo arrastrando la bomba hacia abajo
+3. **Riego:** Al activar la manguera (tecla R), las partículas de agua caen con física realista
+4. **Crecimiento:** Cuando el agua toca una semilla, se acumula en una barra de progreso
+5. **Maduración:** Al llenar la barra de agua, la planta madura y muestra "¡LISTA!"
+6. **Cosecha:** Las plantas maduras pueden cosecharse con la tecla C por 25 puntos cada una
+7. **Gestión de recursos:** El agua es limitada, debes bombear más cuando se agote
 
 ## Tecnologías
 
@@ -43,5 +46,9 @@ Juego de jardinería interactivo que implementa conceptos de física 2D usando P
 ## Archivos
 
 - `index.html` - Página principal
-- `sketch.js` - Código del juego
+- `main.js` - Código principal del juego
+- `Plant.js` - Clase para las plantas y semillas
+- `HoseWater.js` - Clase para las partículas de agua
+- `PlantPreview.js` - Vista previa de plantación
+- `Pump.js` - Sistema de bomba y extracción de agua
 - `README.md` - Este archivo
