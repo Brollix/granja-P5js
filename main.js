@@ -7,6 +7,14 @@ let dt;
 let waterGain = 10;
 let waterStored = 0;
 
+// Game states
+const MENU = 'menu';
+const PLAYING = 'playing';
+let gameState = MENU;
+
+// Menu instance
+let menu;
+
 // Seccion bomba 
 let startY = 550;
 let endY = 600;
@@ -34,11 +42,22 @@ function setup() {
     pump = createVector(50, startY);
     let canvas = createCanvas(GAME_WIDTH, GAME_HEIGHT);
     canvas.parent('gameContainer');
+    menu = new Menu();
 }
 
 function draw() {
-    console.log("Water",pumpWater)
     dt = deltaTime / 1000;
+
+    if (gameState === MENU) {
+        menu.draw();
+    } else if (gameState === PLAYING) {
+        drawGame();
+    }
+}
+
+
+function drawGame() {
+    console.log("Water", pumpWater)
 
     // Fondo
     for (let i = 0; i <= GAME_HEIGHT; i++) {
@@ -90,9 +109,9 @@ function draw() {
         let numStreams = 10;
         let spreadRange = 30;
         let baseAngle = 45;
-        
-        
-        
+
+
+
         for (let i = 0; i < numStreams; i++) {
             let spreadAngle = map(i, 0, numStreams - 1, -spreadRange, spreadRange);
             hoseWater.push(new HoseWater(mouseX, mouseY, baseAngle, 10, spreadAngle));
@@ -135,6 +154,10 @@ function updatePlantPreview() {
 }
 
 function drawUI() {
+    // Restaurar configuración de texto para el HUD
+    textAlign(LEFT);
+    textStyle(NORMAL);
+
     fill(0, 0, 0, 200);
     textSize(18);
     text("Click: Plantar | R: Regar | C: Cosechar", 30, 30);
@@ -144,38 +167,55 @@ function drawUI() {
     text("Agua Restante", 30, 60);
     text(abs(waterStored.toFixed(0)), 175, 60);
     textStyle(NORMAL);
-    
 }
 
 function keyPressed() {
-    if (key === 'r' || key === 'R') {
-        isHoseActive = !isHoseActive;
-    }
+    if (gameState === PLAYING) {
+        if (key === 'r' || key === 'R') {
+            isHoseActive = !isHoseActive;
+        }
 
-    if (key === 'c' || key === 'C') {
-        for (let i = plants.length - 1; i >= 0; i--) {
-            let plant = plants[i];
-            if (plant.isReadyToHarvest()) {
-                plants.splice(i, 1);
-                score += POINTS_PER_PLANT;
+        if (key === 'c' || key === 'C') {
+            for (let i = plants.length - 1; i >= 0; i--) {
+                let plant = plants[i];
+                if (plant.isReadyToHarvest()) {
+                    plants.splice(i, 1);
+                    score += POINTS_PER_PLANT;
+                }
             }
         }
     }
 }
 
 function mousePressed() {
-    if (mouseButton === LEFT && plantPreview) {
-        plants.push(new Plant(plantPreview.x, plantPreview.y));
-        plantPreview = null;
+    if (gameState === MENU) {
+        menu.handleClick();
+    } else if (gameState === PLAYING) {
+        if (mouseButton === LEFT && plantPreview) {
+            plants.push(new Plant(plantPreview.x, plantPreview.y));
+            plantPreview = null;
+        }
+
+        // Chequeamos colision en Pump
+        if (mouseX >= pump.x &&
+            mouseX <= pump.x + pumpWidth &&
+            mouseY >= pump.y &&
+            mouseY <= pump.y + pumpHeight) {
+            mouseDragPump = true;
+            console.log("agarrado")
+        }
     }
+}
 
-      // Chequeamos colision en Pump
-  if(  mouseX >= pump.x &&
-       mouseX <= pump.x + pumpWidth &&
-       mouseY >= pump.y &&
-       mouseY <= pump.y + pumpHeight )
-    
-    {mouseDragPump = true;
-    console.log("agarrado")}
-
+function resetGame() {
+    // Reiniciar variables del juego
+    plants = [];
+    hoseWater = [];
+    isHoseActive = false;
+    plantPreview = null;
+    score = 0;
+    waterStored = 0;
+    mouseDragPump = false;
+    pumpWater = false;
+    pump.y = startY;
 }
