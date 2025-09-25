@@ -12,7 +12,7 @@ let hud;
 // Game states - Compatible with menu system
 const MENU = 'menu';
 const PLAYING = 'playing';
-let gameState = PLAYING; // Start directly in playing mode for now
+let gameState = MENU; // Start in menu mode
 let menu = null; // Will be initialized if Menu class exists
 
 // Seccion bomba 
