@@ -28,7 +28,9 @@ function pumpUpdate() {
     pump.y -= pumpVel * dt;
   }
 
+
   // Dibujar bomba
+  noStroke();
   fill(100, 100, 100);
   rect(pump.x + pumpWidth / 2 - 20, pump.y, 40, pumpHeight * 3);
 
