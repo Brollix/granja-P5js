@@ -6,6 +6,7 @@ let score = 0;
 let dt;
 let waterGain = 10;
 let waterStored = 0;
+let platform;
 
 // Seccion bomba 
 let startY = 550;
@@ -30,15 +31,29 @@ const PLANT_SIZE = 30;
 const POINTS_PER_PLANT = 25;
 const WATER_PER_PARTICLE = 1;
 
+    //Plataforma
+function setup() {
+    let canvas = createCanvas(GAME_WIDTH, GAME_HEIGHT);
+    canvas.parent('gameContainer');
+    platform = new Platform(GAME_WIDTH / 2 - 100, GAME_HEIGHT / 1.35, 250, 20, 3);
+
+}
+
+//Bomba
 function setup() {
     pump = createVector(50, startY);
     let canvas = createCanvas(GAME_WIDTH, GAME_HEIGHT);
     canvas.parent('gameContainer');
 }
 
+
+
 function draw() {
     console.log("Water",pumpWater)
     dt = deltaTime / 1000;
+
+
+
 
     // Fondo
     for (let i = 0; i <= GAME_HEIGHT; i++) {
@@ -68,6 +83,7 @@ function draw() {
     if (plantPreview) {
         plantPreview.draw();
     }
+
 
     // Actualizar agua
     for (let i = hoseWater.length - 1; i >= 0; i--) {

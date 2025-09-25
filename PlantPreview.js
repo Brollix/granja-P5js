@@ -12,4 +12,3 @@ class PlantPreview {
         ellipse(this.x, this.y, this.size, this.size);
     }
 }
-//ranita cambio //ranaa
