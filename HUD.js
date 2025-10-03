@@ -40,7 +40,7 @@ class HUD {
         // Controles principales
         text("🖱️ Click: Plantar semilla", this.infoPanelX + 15, this.infoPanelY + 25);
         text("⌨️ R: Activar/desactivar manguera", this.infoPanelX + 15, this.infoPanelY + 45);
-        text("⌨️ C: Cosechar plantas maduras", this.infoPanelX + 15, this.infoPanelY + 65);
+        text("🖱️ Click: Cosechar plantas maduras", this.infoPanelX + 15, this.infoPanelY + 65);
 
         // Controles secundarios
         textSize(12);

@@ -45,7 +45,7 @@ class Plant {
 		if (this.growthStage === 0) {
 			this.growthStage = 1;
 			this.color = color(34, 139, 34);
-			this.size = PLANT_SIZE + 5;
+			this.size = PLANT_SIZE;
 		}
 	}
 

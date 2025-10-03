@@ -34,7 +34,7 @@ const PLANT_POSITIONS = [
 	{ x: GAME_WIDTH / 2, y: GAME_HEIGHT - 150 },
 	{ x: (GAME_WIDTH * 2) / 3, y: GAME_HEIGHT - 150 }
 ];
-const PLANT_SIZE = 30;
+const PLANT_SIZE = 40;
 const POINTS_PER_PLANT = 25;
 const WATER_PER_PARTICLE = 1;
 
@@ -169,23 +169,25 @@ function updatePlantPreview() {
 	}
 }
 
+// Colision punto circulo, el mouse y la planta lista para cosechar
 
+// por razones que desconozco dist() o no esta calculando bien la distancia o pasa algo raro aca porque la hitbox es mas grande que lo dibujado
+function mouseClicked() {
+	for(let i = plants.length - 1; i >= 0; i--){
+		let plant = plants[i];
+		if (plant.isReadyToHarvest()) {
+			if(dist(mouseX, mouseY, plant.x, plant.y) <= PLANT_SIZE){
+				plants.splice(i, 1);
+				score += POINTS_PER_PLANT;
+			}
+		}
+	}
+}
 function keyPressed() {
 	if (gameState === PLAYING) {
 		if (key === 'r' || key === 'R') {
 			isHoseActive = !isHoseActive;
 		}
-
-		if (key === 'c' || key === 'C') {
-			for (let i = plants.length - 1; i >= 0; i--) {
-				let plant = plants[i];
-				if (plant.isReadyToHarvest()) {
-					plants.splice(i, 1);
-					score += POINTS_PER_PLANT;
-				}
-			}
-		}
-
 		// Atajos de teclado para los botones
 		if (key === 'm' || key === 'M') {
 			// Volver al menú
